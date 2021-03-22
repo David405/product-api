@@ -4,6 +4,8 @@ import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
 
+import { productRoutes } from './routes';
+
 dotenv.config();
 
 if(!process.env.PORT) {
@@ -19,6 +21,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(productRoutes);
 
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
