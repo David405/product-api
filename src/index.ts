@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
 
-import { productRoutes } from './routes';
+import * as productCRUD from './routers/product.router';
 
 dotenv.config();
 
@@ -21,7 +21,11 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-app.use(productRoutes);
+//app.use(productRoutes)
+app.get('/products', productCRUD.getProductList);
+app.post('/products',productCRUD.createProduct);
+app.post('/updateproduct',productCRUD.updateProduct);
+app.post('/deleteproduct',productCRUD.deleteProduct);
 
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
